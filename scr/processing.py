@@ -1,7 +1,7 @@
 def filter_by_state(id_list: list, state: str = "EXECUTED") -> list | None:
     """Функция возвращает список словарей с соответствующим значением состояния"""
     if len(id_list) > 0:
-        return [i for i in id_list if i["state"] == state]
+        return [i for i in id_list if i.get("state") == state]
     else:
         return None
 
