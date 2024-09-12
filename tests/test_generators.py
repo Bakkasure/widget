@@ -1,6 +1,6 @@
 import pytest
 
-from scr.generators import filter_by_currency
+from scr.generators import filter_by_currency, transaction_descriptions
 
 
 @pytest.fixture()
@@ -122,3 +122,18 @@ def test_filter_by_currency(
     assert list(result) == []
     with pytest.raises(Exception):
         assert list(filter_by_currency([], "USD")) == "Транзакций с указанной валютой нет"
+
+
+def test_transaction_descriptions_success(transactions: list[dict]) -> None:
+    tries = transaction_descriptions(transactions)
+    assert next(tries) == "Перевод организации"
+    assert next(tries) == "Перевод со счета на счет"
+    assert next(tries) == "Перевод со счета на счет"
+    assert next(tries) == "Перевод с карты на карту"
+    assert next(tries) == "Перевод организации"
+
+
+def test_transaction_descriptions_failed(transactions: list[dict]) -> None:
+    tries = transaction_descriptions([])
+    with pytest.raises(StopIteration):
+        assert next(tries) == "Список пуст!"

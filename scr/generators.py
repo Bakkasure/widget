@@ -7,5 +7,11 @@ def filter_by_currency(transaction_list: list[dict], currency: str) -> Generator
         for transaction in transaction_list:
             if transaction["operationAmount"]["currency"]["code"] == currency:
                 yield transaction
+
+
+def transaction_descriptions(transaction_list: list[dict]) -> Generator[str, None, None]:
+    if transaction_list:
+        for transaction in transaction_list:
+            yield transaction["description"]
     else:
-        raise Exception("Транзакций с указанной валютой нет")
+        print("Список пуст!")
