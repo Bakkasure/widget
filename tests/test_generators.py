@@ -1,6 +1,6 @@
 import pytest
 
-from scr.generators import filter_by_currency, transaction_descriptions
+from scr.generators import card_number_generator, filter_by_currency, transaction_descriptions
 
 
 @pytest.fixture()
@@ -137,3 +137,12 @@ def test_transaction_descriptions_failed(transactions: list[dict]) -> None:
     tries = transaction_descriptions([])
     with pytest.raises(StopIteration):
         assert next(tries) == "Список пуст!"
+
+
+def test_card_number_generator() -> None:
+    result = card_number_generator(1, 5)
+    assert next(result) == "0000 0000 0000 0001"
+    assert next(result) == "0000 0000 0000 0002"
+    assert next(result) == "0000 0000 0000 0003"
+    assert next(result) == "0000 0000 0000 0004"
+    assert next(result) == "0000 0000 0000 0005"
