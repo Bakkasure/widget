@@ -2,7 +2,7 @@ import json
 from typing import Any
 
 
-def get_operations_list(path: str) -> Any:
+def get_operations_list(path: str) -> list[dict] | Any:
     """Функция принимает путь к JSON-файлу и возвращает список словарей транзакций"""
     try:
         with open(path, encoding="UTF-8") as file:
