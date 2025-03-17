@@ -3,7 +3,7 @@ from typing import Any
 
 import pytest
 
-from scr.decorators import log
+from src.decorators import log
 
 
 @log(filename="")
