@@ -1,6 +1,6 @@
 import pytest
 
-from scr.masks import get_mask_account, get_mask_card_number
+from src.masks import get_mask_account, get_mask_card_number
 
 
 @pytest.mark.parametrize("number, result", [("124587", None), ("", None), ("7001555521219784", "7001 55** **** 9784")])
